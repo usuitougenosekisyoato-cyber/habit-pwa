@@ -1,0 +1,225 @@
+:root {
+  --bg: #f5f3ee;
+  --surface: #ffffff;
+  --text: #1f2a24;
+  --muted: #5f6b64;
+  --line: #e2ded5;
+  --accent: #2f7d5b;
+  --accent-text: #ffffff;
+  --accent-soft: #dcefe5;
+  --danger: #b4402f;
+  --danger-text: #ffffff;
+  --warn-bg: #fbf0dc;
+  --error: #a3392a;
+  --radius: 14px;
+  --tap: 48px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141815;
+    --surface: #1d231f;
+    --text: #e8ece9;
+    --muted: #a3ada7;
+    --line: #2f3832;
+    --accent: #5fbf8f;
+    --accent-text: #0e1a13;
+    --accent-soft: #24402f;
+    --danger: #e0715f;
+    --danger-text: #1a0e0b;
+    --warn-bg: #3a2f1b;
+    --error: #f08a78;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+.app-header, main {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.app-header { padding-top: 20px; padding-bottom: 8px; }
+.app-header h1 { margin: 0; font-size: 1.4rem; letter-spacing: 0.02em; }
+.today-label { margin: 2px 0 0; color: var(--muted); }
+
+main { padding-bottom: 32px; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-top: 14px;
+}
+.card h2 { margin: 0 0 12px; font-size: 1.05rem; }
+
+button, .button {
+  font: inherit;
+  min-height: var(--tap);
+  padding: 0 18px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+button:disabled { opacity: 0.6; cursor: default; }
+button.secondary {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+button.danger { background: var(--danger); color: var(--danger-text); }
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.add-form { display: flex; gap: 8px; }
+.add-form input {
+  flex: 1;
+  min-width: 0;
+  min-height: var(--tap);
+  font: inherit;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.message { margin: 8px 0 0; min-height: 1.6em; color: var(--muted); font-size: 0.92rem; }
+.message.error { color: var(--error); }
+.message ul { margin: 4px 0 0; padding-left: 1.2em; }
+
+.habit-list { list-style: none; margin: 0; padding: 0; }
+.habit {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+.habit:first-child { border-top: none; }
+
+.check {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid var(--line);
+  color: transparent;
+  font-size: 1.6rem;
+  line-height: 1;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+.check[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+.habit-text { display: flex; flex-direction: column; min-width: 0; }
+.habit-name { font-weight: 600; overflow-wrap: anywhere; }
+.streak { color: var(--muted); font-size: 0.9rem; }
+.streak.on { color: var(--accent); font-weight: 600; }
+
+.empty { margin: 0; color: var(--muted); }
+
+.select-label { display: flex; align-items: center; gap: 10px; }
+.select-label span { color: var(--muted); flex: none; }
+.select-label select {
+  flex: 1;
+  min-width: 0;
+  min-height: var(--tap);
+  font: inherit;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.month-summary { margin: 12px 0 8px; font-size: 0.95rem; }
+.month-summary strong { font-size: 1.3rem; color: var(--accent); }
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  text-align: center;
+}
+.calendar .weekday { font-size: 0.75rem; color: var(--muted); padding-bottom: 2px; }
+.calendar .weekday.sun { color: var(--danger); }
+.calendar .day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+  background: var(--bg);
+}
+.calendar .day.checked { background: var(--accent); color: var(--accent-text); font-weight: 700; }
+.calendar .day.today { box-shadow: inset 0 0 0 2px var(--text); }
+.calendar .day.future { opacity: 0.4; }
+
+.hint { margin: 0 0 12px; color: var(--muted); font-size: 0.9rem; }
+.backup-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+.backup-buttons button { flex: 1; }
+
+.banner {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--accent-soft);
+  border-bottom: 1px solid var(--accent);
+  font-weight: 600;
+}
+.banner[hidden] { display: none; }
+
+dialog {
+  width: min(440px, calc(100vw - 32px));
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  background: var(--surface);
+  color: var(--text);
+}
+dialog::backdrop { background: rgba(0, 0, 0, 0.45); }
+dialog h2 { margin: 0 0 12px; font-size: 1.1rem; }
+.compare { margin: 0; display: grid; gap: 10px; }
+.compare div { background: var(--bg); border-radius: 10px; padding: 10px 12px; }
+.compare dt { font-size: 0.85rem; color: var(--muted); }
+.compare dd { margin: 0; font-weight: 600; }
+.compare dd small { display: block; font-weight: 400; color: var(--muted); }
+.warn { background: var(--warn-bg); border-radius: 10px; padding: 10px 12px; font-size: 0.9rem; }
+.dialog-buttons { display: flex; gap: 8px; }
+.dialog-buttons button { flex: 1; }

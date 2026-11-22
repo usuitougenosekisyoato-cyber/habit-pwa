@@ -1,0 +1,9 @@
+{
+  "app": "some-other-app",
+  "format": 1,
+  "exportedAt": "2026-11-21T21:00:00+09:00",
+  "data": {
+    "version": 1,
+    "habits": []
+  }
+}
